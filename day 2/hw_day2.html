@@ -3,11 +3,13 @@
 
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Hi+Melody&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Hi+Melody&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -25,38 +27,57 @@
             width: 100px;
             margin: 10px auto;
             display: block;
-          
+
         }
-        *{font-family: 'East Sea Dokdo', cursive;
-font-family: 'Hi Melody', cursive;}
+
+        * {
+            font-family: 'East Sea Dokdo', cursive;
+            font-family: 'Hi Melody', cursive;
+        }
     </style>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
-        <!-- 1. 이름 주소 번호 있는 div 에 id 만들기 
-            2. 함수 : if 순서대로... 
-            3. alert! 
-            -->
-            function hw2(){
-                let name = $('#cname').val();
-                let ad = $('#home').val();
-                let num = $('you').val(;)
-                if(name == ''){
-                    alert('이름을 입력하세요');
-                    return;
-                                    }
-                else if(ad == ''){
-                    alert('주소좀;;');
-                    return;
-                }
-                else if(you == ''){
-                    alert('번호점..');
-                    return;
-                }
+    <script>
 
+        function hw2() {
+            let name = $('#cname').val();
+            let ad = $('#home').val();
+            let num = $('#you').val();
+            if (name == '') {
+                alert('이름을 입력하세요');
+            }
+            else if (ad == '') {
+                alert('주소좀;;');
+            }
+            else if (num == '') {
+                alert('번호점..');
             }
 
+        }
 
-</script>
+
+    </script>
+
+<script>
+
+    $(document).ready(function(){
+        alert('다 로딩됐다!')
+      // 여기에 환율 API Ajax 요청을 하면 되겠죠?
+$.ajax({
+    type : "GET",
+    url : "https://api.manana.kr/exchange/rate.json",
+    data : {},
+    success : function (response){
+        let rows = response[1]["rate"];
+        let dk = "달러 원 환율 :" + "$" + rows;
+    $('#dol_krw').text(dk);
+    }
+
+
+})
+
+    });
+    
+    </script>
 
 </head>
 
@@ -69,55 +90,59 @@ font-family: 'Hi Melody', cursive;}
             애플워치 팝니다. <small>가격 : $100/개</small>
         </p>
     </div>
-<div style= "margin-top: .5cm; margin-bottom: .5cm;">
+    <div style="margin-top: .5cm; margin-bottom: .5cm;">
         <h7>
             10년에 한 번 찾아오는 할인!
         </h7>
+        <div>
+        <span id = "dol_krw"></span
+            >
+    </div>
     </div>
 
-<div>
-    <h3>주문하기
+    <div>
+        <h3>주문하기
 
-    </h3>
-</div>
-    <div id = "hangry">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">주문자 이름 : </span>
+        </h3>
+    </div>
+    <div id="hangry">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">주문자 이름 : </span>
+            </div>
+            <input id="cname" type="text" class="form-control"  aria-describedby="basic-addon3">
         </div>
-        <input id = "cname" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">수량 : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">수량 : </span>
+
+            </div>
+            <select class="form-control">
+                <option>Default select</option>
+                <option>1개</option>
+                <option>2개</option>
+                <option>3개</option>
+                <option>...</option>
+            </select>
 
         </div>
-        <select class="form-control">
-            <option>Default select</option>
-            <option>1개</option>
-            <option>2개</option>
-            <option>3개</option>
-            <option>...</option>
-        </select>
-
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">주소 : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">주소 : </span>
+            </div>
+            <input id="home" type="text" class="form-control"  aria-describedby="basic-addon3">
         </div>
-        <input id = "home" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">전화번호 : </span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">전화번호 : </span>
+            </div>
+            <input id="you" type="text" class="form-control"  aria-describedby="basic-addon3">
         </div>
-        <input id = "you" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-    </div>
 
-    <div >
-        <button onclick = "hw2()" type="button" class="btn btn-outline-dark home"  >주문하기</button>
+        <div>
+            <button onclick="hw2()" type="button" class="btn btn-outline-dark home">주문하기</button>
 
-    </div>
+        </div>
 </body>
 
 
